@@ -3,10 +3,10 @@
 
 ## How to use?
 Clone the repository using 
-	`git clone https://github.com/pranith246/DSA.git`
+	`git clone https://github.com/pranith246/DSA.git` 
 To run C++ files with GNU GCC use the command
-	g++ -w <filename> -o <outputfile>
-	./<outputfile>
+	```g++ -w <filename> -o <outputfile>
+	./<outputfile>``` 
 '-w' flag supresses the warnings.
 
 ***
