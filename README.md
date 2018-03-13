@@ -6,7 +6,7 @@ Clone the repository using
 	`git clone https://github.com/pranith246/DSA.git` 
 To run C++ files with GNU GCC use the command
 	```g++ -w <filename> -o <outputfile>
-	./<outputfile>``` 
+	./<outputfile>```   
 '-w' flag supresses the warnings.
 
 ***
