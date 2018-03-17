@@ -20,4 +20,4 @@ g++ -w <filename> -o <outputfile>
 * Comments should be used extensively to explain logical steps that you are doing.
 
 ***
-<p align='center'>NIT Rourkela</p>
+<p align='center'>Every line matters</p>
