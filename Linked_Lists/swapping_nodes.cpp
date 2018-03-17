@@ -75,10 +75,13 @@ void swapNodes2(Node **head_ref){
 
 		head_ref = &((*head_ref)->next);
 	}
-	//swapping the current pointers
-	swap(*a,*b);
-	//swapping the next pointers
-	swap((*a)->next,(*b)->next);
+
+	if(a&&b){
+		//swapping the current pointers
+		swap(*a,*b);
+		//swapping the next pointers
+		swap((*a)->next,(*b)->next);
+	}
 }
 
 int main(){
