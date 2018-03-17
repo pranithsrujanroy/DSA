@@ -1,91 +1,125 @@
 #include<stdio.h>
 #include<stdlib.h>
 
-typedef struct Node{
-    int data;
-    struct Node* next;
+typedef struct Node
+{
+	int data;
+	struct Node* next;
 }Node;
 
-void printList(Node* head){
+void makeList(Node** head){
+	int n;
+	printf("Enter the number of elements to be inserted in the list initially: \n");
+	scanf("%d",&n);
+	if(n==0)
+		return;
+	int data;
+	Node* temp = *head;
+	printf("Enter the elements:\n");
+	for(int i=0; i<n; i++ ){
+		scanf("%d",&data);
+		Node* nnode = (Node*)malloc(sizeof(Node));
+		nnode->data = data;
+		nnode->next = NULL;
+		if(temp==NULL){
+			*head = nnode;
+			temp = nnode;
+		}
+		else{
+			temp->next = nnode;
+			temp = temp->next;
+		}
+	}
+	return;
+}
+
+void insertNode(Node **head_ref, int data, int position){
+	Node* nnode = (Node*)malloc(sizeof(Node));
+	nnode->data = data;
+	nnode->next = NULL;
+	if(position==0){
+		nnode->next = *head_ref;
+		*head_ref = nnode;
+		return;
+	}
+	int i = 0;
+	Node* prev = *head_ref;
+	while(i<position-1 && prev->next!=NULL){
+		prev=prev->next;
+		i++;
+	}
+	if(prev->next==NULL){
+		//appending to the list
+		prev->next = nnode;
+	}
+	else{
+		nnode->next = prev->next;
+		prev->next  = nnode;
+	}
+	return;
+}
+
+void deleteNodeByData(Node** head_ref,int data){
+	Node* temp = *head_ref;
+	if(temp->data==data){
+		*head_ref = temp->next;	
+		return;
+	}
+	Node *prev;
+	temp = *head_ref;
+	while(temp->data!=data && temp->next!=NULL){
+		prev = temp;
+		temp = temp->next;
+	}
+	if(temp->data!=data && temp->next==NULL){
+		printf("The node to be deleted is not present in the list.\n" );
+		return;
+	}
+	prev->next = temp->next;
+	temp->next = NULL;
+	free(temp);
+	return;
+}
+
+void deleteNodeByPosition(Node** head_ref, int position){
+	Node *prev = *head_ref, *temp;
+	if(position==0){
+		*head_ref = prev->next;
+		return;
+	}
+	int i = 0;
+	while(i<position-1 && prev->next!=NULL){
+		prev = prev->next;
+		i++;
+	}
+	if(prev->next==NULL){
+		printf("The node to be deleted is not present in the list.\n");
+		return;
+	}
+	else{
+		temp=prev->next;
+		prev->next = temp->next;
+		temp->next = NULL;
+		free(temp);
+	}
+	return;
+}
+
+void printList(Node *head){
 	Node* ptr = head;
 	while(ptr!=NULL){
 		printf("%d\t", ptr->data);
-		ptr=ptr->next;
+		ptr = ptr->next;
 	}
 	printf("\n");
 }
 
-Node* makeList(int a[],int n){
-	Node* head = (Node*)malloc(sizeof(Node));
-	head->data = a[0];
+int countNodesInList(Node *head){
+	int count = 0;
 	Node* ptr = head;
-	int i = 1;
-	while(i<n){
-		Node* nnode = (Node*)malloc(sizeof(Node));
-		nnode->data = a[i];
-		i++;
-		nnode->next = NULL;
-		ptr->next = nnode;
+	while(ptr!=NULL){
+		count++;
 		ptr = ptr->next;
 	}
-	return head;
-}
-Node* insertNode(Node* head, int data, int position){
-	Node* nnode = (Node*)malloc(sizeof(Node));
-	nnode->data = data;
-	nnode->next = NULL;
-	int i = 1;
-	Node* ptr = head;
-	//It is important to note here the number of times we are looping because we already point to the first node and we wish to point
-	//to the previous node of the position. Therefore we require to move the pointer position-2 times.
-	while(i<(position-1)&&ptr->next!=NULL){
-		ptr=ptr->next;
-		i++;
-	}
-	//Now ptr points to the node previous to the position of the node to be inserted.
-	if(ptr->next==NULL){
-		ptr->next = nnode;
-	}
-	else{
-		nnode->next = ptr->next;
-		ptr->next = nnode;
-	}
-	ptr=NULL;
-	free(ptr);
-	return head;
-}
-Node* deleteNodeByData(Node* head, int data){
-	Node* ptr=head;
-	Node* temp;
-	while(ptr->next!=NULL && (ptr->next)->data!=data)
-		ptr=ptr->next;
-	if(ptr->next==NULL){
-		printf("The data to be deleted is not present in the list.\n");
-		return head;
-	}
-	temp=ptr->next;
-	ptr->next = temp->next;
-	temp->next=NULL;
-	free(temp);
-	ptr=NULL;
-	free(ptr);
-	return head;
-}
-Node* deleteNodeByPosition(Node* head, int position){
-	Node* ptr=head;
-	Node* temp;
-	int i=1;
-	while(i<position-2 && ptr->next!=NULL){
-		ptr=ptr->next;
-		i++;
-	}
-	if(ptr->next==NULL){
-		printf("The position is not in the list.\n");
-		return head;
-	}
-	temp=ptr->next;
-	ptr->next = temp->next;
-	temp->next = NULL;
-	free(temp);
-	return head;
+	printf("Number of nodes in the list is: %d\n", count);
 }

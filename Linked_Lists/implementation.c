@@ -3,19 +3,15 @@
 #include"implementation.h"
 int main(){
 	int n;
-	printf("How many nodes do you wish to have initially?\n");
-	scanf("%d",&n);
-	int a[n];
-	printf("Enter the data:");
-	for(int i=0;i<n;i++)
-		scanf("%d",&a[i]);
-	Node* head = makeList(a,n);
+	Node* head=NULL;
+	makeList(&head);
 	printList(head);
-	insertNode(head,6,7);
+	insertNode(&head,6,5);
 	printList(head);
-	deleteNodeByData(head,4);
+	deleteNodeByData(&head,6);
 	printList(head);
-	deleteNodeByPosition(head,7);
+	deleteNodeByPosition(&head,4);
 	printList(head);
+	countNodesInList(head);
 	return 0;
 }
