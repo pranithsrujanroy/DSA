@@ -7,14 +7,14 @@ typedef struct Node
 	struct Node* next;
 }Node;
 
-void makeList(Node** head){
+void makeList(Node** head_ref){
 	int n;
 	printf("Enter the number of elements to be inserted in the list initially: \n");
 	scanf("%d",&n);
 	if(n==0)
 		return;
 	int data;
-	Node* temp = *head;
+	Node* temp = *head_ref;
 	printf("Enter the elements:\n");
 	for(int i=0; i<n; i++ ){
 		scanf("%d",&data);
@@ -22,7 +22,7 @@ void makeList(Node** head){
 		nnode->data = data;
 		nnode->next = NULL;
 		if(temp==NULL){
-			*head = nnode;
+			*head_ref = nnode;
 			temp = nnode;
 		}
 		else{
@@ -37,7 +37,7 @@ void insertNode(Node **head_ref, int data, int position){
 	Node* nnode = (Node*)malloc(sizeof(Node));
 	nnode->data = data;
 	nnode->next = NULL;
-	if(position==0){
+	if(position==0 || *head_ref == NULL){ // *head_ref==NULL; If list is empty, insert even if it is an invalid position.
 		nnode->next = *head_ref;
 		*head_ref = nnode;
 		return;
@@ -60,6 +60,7 @@ void insertNode(Node **head_ref, int data, int position){
 }
 
 void deleteNodeByData(Node** head_ref,int data){
+	if(*head_ref==NULL) return; // Nothing can be deleted from an empty list. Without this if we try to delete from an empty list then it is corrupt memory access. 
 	Node* temp = *head_ref;
 	if(temp->data==data){
 		*head_ref = temp->next;	
@@ -82,6 +83,7 @@ void deleteNodeByData(Node** head_ref,int data){
 }
 
 void deleteNodeByPosition(Node** head_ref, int position){
+	if(*head_ref==NULL) return; // Nothing can be deleted from an empty list. Without this if we try to delete from an empty list then it is corrupt memory access. 
 	Node *prev = *head_ref, *temp;
 	if(position==0){
 		*head_ref = prev->next;
