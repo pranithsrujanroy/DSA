@@ -15,5 +15,9 @@ g++ -w <filename> -o <outputfile>
 '-w' flag supresses the warnings.
 >Make sure you are inside the folder where the file is located or else give the full path to the file from your current folder. Using tab for autocompletion helps in this case. Single tab for autocomplete if possible without ambiguity and double tab to list all possible completions.
 
+## Guidelines for developers
+* Use good qualifiers for variable names, files and functions.
+* Comments should be used extensively to explain logical steps that you are doing.
+
 ***
-<p align='center'>NIT Rourkela</p>
+<p align='center'>Every line matters</p>
