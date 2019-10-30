@@ -4,7 +4,7 @@
 ## How to use?
 1. Clone the repository using  
 	```
-	git clone https://github.com/pranith246/DSA.git
+	git clone https://github.com/pranithsrujanroy/DSA.git
 	```  
 
 2. To run C++ files with GNU GCC use the command  
